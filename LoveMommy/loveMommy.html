@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妈妈我爱你</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffe6f2;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        /* 闪烁的红心背景 */
+        .heart {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            transform: rotate(45deg);
+            animation: heartbeat 1.5s infinite;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .heart:before {
+            top: -150px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -150px;
+        }
+        
+        /* 心跳动画 */
+        @keyframes heartbeat {
+            0% { transform: rotate(45deg) scale(1); }
+            25% { transform: rotate(45deg) scale(1.1); }
+            50% { transform: rotate(45deg) scale(1); }
+            75% { transform: rotate(45deg) scale(1.1); }
+            100% { transform: rotate(45deg) scale(1); }
+        }
+        
+        /* 滚动横幅 */
+        .banner {
+            position: relative;
+            z-index: 1;
+            width: 80%;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .message {
+            font-size: 3em;
+            color: #ff1493;
+            white-space: nowrap;
+            animation: scrollText 10s linear infinite;
+        }
+        
+        /* 文字滚动动画 */
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 闪烁的红心背景 -->
+    <div class="heart"></div>
+    
+    <!-- 滚动文字横幅 -->
+    <div class="banner">
+        <div class="message">❤️ 妈妈我爱你 ❤️ 妈妈我爱你 ❤️ 妈妈我爱你 ❤️</div>
+    </div>
+    
+    <script>
+        // 添加点击效果
+        document.body.addEventListener('click', function() {
+            const newHeart = document.createElement('div');
+            newHeart.className = 'heart';
+            newHeart.style.left = (Math.random() * window.innerWidth) + 'px';
+            newHeart.style.top = (Math.random() * window.innerHeight) + 'px';
+            newHeart.style.opacity = '0.3';
+            newHeart.style.animationDuration = (Math.random() * 1 + 0.5) + 's';
+            document.body.appendChild(newHeart);
+            
+            // 5秒后移除心形
+            setTimeout(() => {
+                newHeart.remove();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
